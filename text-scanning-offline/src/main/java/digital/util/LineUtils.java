@@ -1,6 +1,6 @@
-package util;
+package digital.util;
 
-import model.Line;
+import digital.model.Line;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package model;
+package digital.model;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class Number {
+public class Digit {
     private final Line top;
     private final Line middle;
     private final Line bottom;

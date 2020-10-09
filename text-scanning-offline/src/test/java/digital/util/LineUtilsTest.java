@@ -1,6 +1,6 @@
-package util;
+package digital.util;
 
-import model.Line;
+import digital.model.Line;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -8,8 +8,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static model.Fill.BAR;
-import static model.Fill.LINE;
+import static digital.model.Fill.BAR;
+import static digital.model.Fill.LINE;
 
 class LineUtilsTest {
     public static Stream<Arguments> should_match_edge() {

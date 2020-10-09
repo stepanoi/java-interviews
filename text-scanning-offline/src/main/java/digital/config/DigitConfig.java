@@ -1,39 +1,39 @@
-package config;
+package digital.config;
 
-import model.Line;
-import model.Number;
+import digital.model.Digit;
+import digital.model.Line;
 
 import java.util.Map;
 
-import static model.Fill.BAR;
-import static model.Fill.BLANK;
-import static model.Fill.LINE;
+import static digital.model.Fill.BAR;
+import static digital.model.Fill.BLANK;
+import static digital.model.Fill.LINE;
 
-public class NumberConfig {
+public class DigitConfig {
     /*
      *  _
      * |_|
      * |_|
      */
-    private static final Number reference = Number.builder()
-                                                  .top(Line.builder() //     -
+    private static final Digit reference = Digit.builder()
+                                                .top(Line.builder() //     -
                                                            .left(BLANK)
                                                            .body(BAR)
                                                            .right(BLANK)
                                                            .build())
-                                                  .middle(Line.builder() // |_|
+                                                .middle(Line.builder() // |_|
                                                               .left(LINE)
                                                               .body(BAR)
                                                               .right(LINE)
                                                               .build())
-                                                  .bottom(Line.builder() // |_|
+                                                .bottom(Line.builder() // |_|
                                                               .left(LINE)
                                                               .body(BAR)
                                                               .right(LINE)
                                                               .build())
-                                                  .build();
+                                                .build();
 
-    public static Map<Number, Integer> NUMBER_MAP = Map.of(
+    public static Map<Digit, Integer> MAP = Map.of(
             /*
              *  -
              * | |

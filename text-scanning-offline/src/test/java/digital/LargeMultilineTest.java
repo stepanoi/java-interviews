@@ -1,6 +1,8 @@
-import config.NumberConfig;
-import model.Line;
-import model.Number;
+package digital;
+
+import digital.config.DigitConfig;
+import digital.model.Digit;
+import digital.model.Line;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -35,34 +37,34 @@ public class LargeMultilineTest {
                                   .collect(Collectors.joining());
 
         System.out.println(generated);
-        TextScanner unit = new TextScanner();
+        DigitalTextScanner unit = new DigitalTextScanner();
         assertEquals(strings.stream().collect(Collectors.joining(System.lineSeparator())), unit.scan(generated));
     }
 
     private String generate(String s) {
-        List<Number> numbers = Arrays.stream(s.split(""))
-                                     .map(e1 -> NumberConfig.NUMBER_MAP.entrySet()
-                                                                       .stream()
-                                                                       .filter(e -> e.getValue() == Integer.parseInt(e1))
-                                                                       .map(Map.Entry::getKey)
-                                                                       .findFirst()
-                                                                       .get())
-                                     .collect(Collectors.toList());
+        List<Digit> digits = Arrays.stream(s.split(""))
+                                   .map(e1 -> DigitConfig.MAP.entrySet()
+                                                             .stream()
+                                                             .filter(e -> e.getValue() == Integer.parseInt(e1))
+                                                             .map(Map.Entry::getKey)
+                                                             .findFirst()
+                                                             .get())
+                                   .collect(Collectors.toList());
 
         StringBuilder builder = new StringBuilder();
-        for (Number n : numbers) {
+        for (Digit n : digits) {
             printLine(n.getTop(), builder);
         }
 
         builder.append(System.lineSeparator());
 
-        for (Number n : numbers) {
+        for (Digit n : digits) {
             printLine(n.getMiddle(), builder);
         }
 
         builder.append(System.lineSeparator());
 
-        for (Number n : numbers) {
+        for (Digit n : digits) {
             printLine(n.getBottom(), builder);
         }
 

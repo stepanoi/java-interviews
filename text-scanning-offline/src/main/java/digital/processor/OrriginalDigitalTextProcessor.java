@@ -1,11 +1,13 @@
-import config.NumberConfig;
-import config.VariableNumberConfig;
+package digital.processor;
+
+import digital.config.DigitConfig;
+import digital.config.VariableDigitConfig;
+import digital.model.Block;
+import digital.model.Digit;
+import digital.model.Fill;
+import digital.model.Line;
+import digital.model.VariableDigit;
 import lombok.extern.slf4j.Slf4j;
-import model.Fill;
-import model.Image;
-import model.Line;
-import model.Number;
-import model.VariableNumber;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.Arrays;
@@ -16,19 +18,21 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static digital.DigitalTextScanner.MIN_WIDTH;
+import static digital.util.LineUtils.matchBody;
+import static digital.util.LineUtils.matchEdge;
+import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.stripToNull;
-import static util.LineUtils.matchBody;
-import static util.LineUtils.matchEdge;
 
 @Slf4j
-public class TextProcessor {
+public class OrriginalDigitalTextProcessor {
 
     private static final String UNKNOWN = "?";
     private static final String ILLEGAL = "ILL";
+    public static final String EMPTY = "";
 
-    public String processLine(final String[] lines, final int start, final int end, final int width) {
-
-        int lineLength = lineLength(lines);
+    public String processLine(Block block, final int width) {
+        int lineLength = lineLength(block.getLines());
             /* 
                 _  _     _  _  _  _  _ 
               | _| _||_||_ |_   ||_||_| 
@@ -39,7 +43,7 @@ public class TextProcessor {
 
 
         String result = IntStream.iterate(0, i -> i < lineLength, i -> i += width)
-                                 .mapToObj(carrot -> snapShot(lines, start, end, carrot, width))
+                                 .mapToObj(carrot -> read(block.getLines(), block.getStart(), block.getEnd(), carrot, width))
                                  .map(this::process)
                                  .collect(Collectors.joining());
 
@@ -50,28 +54,26 @@ public class TextProcessor {
         return result;
     }
 
-    private Image snapShot(final String[] lines, final int start, final int end, final int carrot, final int width) {
-        return Image.builder()
-                    .lines(Arrays.stream(lines, start, end)
-                                 .map(e -> e.substring(carrot, carrot + width))
-                                 .collect(Collectors.toList()))
-                    .build();
+    private List<String> read(final String[] lines, final int start, final int end, final int carrot, final int width) {
+        return Arrays.stream(lines, start, end)
+                     .map(e -> e.substring(carrot, carrot + width))
+                     .collect(Collectors.toList());
     }
 
-    private String process(final Image image) {
-        int numberOfLines = image.getLines().size();
+    private String process(final List<String> lines) {
+        int numberOfLines = lines.size();
         int firstLinePos = 0;
         int middleLinePos = (int) Math.floor(((double) numberOfLines) / 2);
-        int lastLinePos = image.getLines().size() - 1;
+        int lastLinePos = lines.size() - 1;
 
-        Number number = buildNumber(image, firstLinePos, middleLinePos, lastLinePos);
-        Integer value = NumberConfig.NUMBER_MAP.get(number);
-        Optional<VariableNumber> variableNumber = buildVariableNumber(image, firstLinePos, middleLinePos, lastLinePos);
+        Digit digit = buildDigit(lines, firstLinePos, middleLinePos, lastLinePos);
+        Integer value = DigitConfig.MAP.get(digit);
+        Optional<VariableDigit> variableDigit = buildVariableDigit(lines, firstLinePos, middleLinePos, lastLinePos);
 
-        if (value != null && variableNumber.isPresent()) {
+        if (nonNull(value) && variableDigit.isPresent()) {
 
-            VariableNumber ref = VariableNumberConfig.variableNumberMap.get(value);
-            VariableNumber current = variableNumber.get();
+            VariableDigit ref = VariableDigitConfig.MAP.get(value);
+            VariableDigit current = variableDigit.get();
 
             boolean topEdgeMatch = matchEdge(current.getTop(), ref.getTop());
 
@@ -89,7 +91,7 @@ public class TextProcessor {
                           .orElse(null);
         }
 
-        return value == null ? UNKNOWN : value + "";
+        return value == null ? UNKNOWN : value + EMPTY;
     }
 
     private int lineLength(final String[] lines) {
@@ -104,55 +106,55 @@ public class TextProcessor {
         }
 
         return lineLengths.stream()
-                          .filter(e -> e % TextScanner.minWidth == 0)
+                          .filter(e -> e % MIN_WIDTH == 0)
                           .findFirst()
-                          .orElseThrow(() -> new IllegalStateException("Line needs to be in multiples of " + TextScanner.minWidth));
+                          .orElseThrow(() -> new IllegalStateException("Line needs to be in multiples of " + MIN_WIDTH));
     }
 
-    private Number buildNumber(final Image image, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
-        return Number.builder()
-                     .top(Line.builder()
-                              .left(lineLeft(image.getLines().get(firstLinePos)))
-                              .body(lineBody(image.getLines().get(firstLinePos)))
-                              .right(lineRight(image.getLines().get(firstLinePos)))
+    private Digit buildDigit(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
+        return Digit.builder()
+                    .top(Line.builder()
+                              .left(lineLeft(lines.get(firstLinePos)))
+                              .body(lineBody(lines.get(firstLinePos)))
+                              .right(lineRight(lines.get(firstLinePos)))
                               .build())
-                     .middle(Line.builder()
-                                 .left(lineLeft(image.getLines().get(middleLinePos)))
-                                 .body(lineBody(image.getLines().get(middleLinePos)))
-                                 .right(lineRight(image.getLines().get(middleLinePos)))
+                    .middle(Line.builder()
+                                 .left(lineLeft(lines.get(middleLinePos)))
+                                 .body(lineBody(lines.get(middleLinePos)))
+                                 .right(lineRight(lines.get(middleLinePos)))
                                  .build())
-                     .bottom(Line.builder()
-                                 .left(lineLeft(image.getLines().get(lastLinePos)))
-                                 .body(lineBody(image.getLines().get(lastLinePos)))
-                                 .right(lineRight(image.getLines().get(lastLinePos)))
+                    .bottom(Line.builder()
+                                 .left(lineLeft(lines.get(lastLinePos)))
+                                 .body(lineBody(lines.get(lastLinePos)))
+                                 .right(lineRight(lines.get(lastLinePos)))
                                  .build())
-                     .build();
-    }
-
-    private Optional<VariableNumber> buildVariableNumber(final Image image, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
-        Optional<Line> top = variableLine(firstLinePos + 1, middleLinePos, image.getLines());
-        Optional<Line> bottom = variableLine(middleLinePos + 1, lastLinePos, image.getLines());
-
-        return top.isEmpty() && bottom.isEmpty()
-                ? Optional.empty()
-                : Optional.of(VariableNumber.builder()
-                                            .top(top.orElse(null))
-                                            .bottom(bottom.orElse(null))
-                                            .build());
+                    .build();
     }
 
     private Fill lineLeft(final String s) {
-        return Fill.from(s.charAt(0) + "");
+        return Fill.from(s.charAt(0) + EMPTY);
     }
 
     private Fill lineBody(final String s) {
-        return Fill.from(Arrays.stream(s.substring(1, s.length() - 1).split(""))
+        return Fill.from(Arrays.stream(s.substring(1, s.length() - 1).split(EMPTY))
                                .distinct()
                                .collect(Collectors.joining()));
     }
 
     private Fill lineRight(final String s) {
-        return Fill.from(s.charAt(s.length() - 1) + "");
+        return Fill.from(s.charAt(s.length() - 1) + EMPTY);
+    }
+
+    private Optional<VariableDigit> buildVariableDigit(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
+        Optional<Line> top = variableLine(firstLinePos + 1, middleLinePos, lines);
+        Optional<Line> bottom = variableLine(middleLinePos + 1, lastLinePos, lines);
+
+        return top.isEmpty() && bottom.isEmpty()
+                ? Optional.empty()
+                : Optional.of(VariableDigit.builder()
+                                           .top(top.orElse(null))
+                                           .bottom(bottom.orElse(null))
+                                           .build());
     }
 
     private Optional<Line> variableLine(final int start, final int end, final List<String> lines) {

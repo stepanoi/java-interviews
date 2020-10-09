@@ -1,3 +1,5 @@
+package digital;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,7 +12,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FileInputTest {
-    private final TextScanner unit = new TextScanner();
+    private final DigitalTextScanner unit = new DigitalTextScanner();
 
     public static Stream<Arguments> should_read_from_file_and_match() {
         return Stream.of(

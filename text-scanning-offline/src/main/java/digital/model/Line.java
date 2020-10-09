@@ -1,4 +1,4 @@
-package model;
+package digital.model;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

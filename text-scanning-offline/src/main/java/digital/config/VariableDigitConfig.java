@@ -1,14 +1,14 @@
-package config;
+package digital.config;
 
-import model.Line;
-import model.VariableNumber;
+import digital.model.Line;
+import digital.model.VariableDigit;
 
 import java.util.Map;
 
-import static model.Fill.BLANK;
-import static model.Fill.LINE;
+import static digital.model.Fill.BLANK;
+import static digital.model.Fill.LINE;
 
-public class VariableNumberConfig {
+public class VariableDigitConfig {
     
     
     /*   *    *
@@ -18,18 +18,18 @@ public class VariableNumberConfig {
      * |  | |  | *
      * |__| |__|
      */
-    public static final VariableNumber VARIABLE_NUMBER_0_8 = VariableNumber.builder()
-                                                                           .top(Line.builder()
+    public static final VariableDigit VARIABLE_NUMBER_0_8 = VariableDigit.builder()
+                                                                         .top(Line.builder()
                                                                                     .left(LINE)
                                                                                     .body(BLANK)
                                                                                     .right(LINE)
                                                                                     .build())
-                                                                           .bottom(Line.builder()
+                                                                         .bottom(Line.builder()
                                                                                        .left(LINE)
                                                                                        .body(BLANK)
                                                                                        .right(LINE)
                                                                                        .build())
-                                                                           .build();
+                                                                         .build();
     /*   *    *    *
      *       --   --
      *    |    |    | *
@@ -37,18 +37,18 @@ public class VariableNumberConfig {
      *    |    |    | *
      *    |  __|    |
      */
-    public static final VariableNumber VARIABLE_NUMBER_1_3_7 = VariableNumber.builder()
-                                                                             .top(Line.builder()
+    public static final VariableDigit VARIABLE_NUMBER_1_3_7 = VariableDigit.builder()
+                                                                           .top(Line.builder()
                                                                                       .left(BLANK)
                                                                                       .body(BLANK)
                                                                                       .right(LINE)
                                                                                       .build())
-                                                                             .bottom(Line.builder()
+                                                                           .bottom(Line.builder()
                                                                                          .left(BLANK)
                                                                                          .body(BLANK)
                                                                                          .right(LINE)
                                                                                          .build())
-                                                                             .build();
+                                                                           .build();
     /*   *
      *  __
      *    | *
@@ -56,18 +56,18 @@ public class VariableNumberConfig {
      * |    *
      * |__
      */
-    public static final VariableNumber VARIABLE_NUMBER_2 = VariableNumber.builder()
-                                                                         .top(Line.builder()
+    public static final VariableDigit VARIABLE_NUMBER_2 = VariableDigit.builder()
+                                                                       .top(Line.builder()
                                                                                   .left(BLANK)
                                                                                   .body(BLANK)
                                                                                   .right(LINE)
                                                                                   .build())
-                                                                         .bottom(Line.builder()
+                                                                       .bottom(Line.builder()
                                                                                      .left(LINE)
                                                                                      .body(BLANK)
                                                                                      .right(BLANK)
                                                                                      .build())
-                                                                         .build();
+                                                                       .build();
     /*   *     *
      *        __
      * |  |  |  | *
@@ -75,18 +75,18 @@ public class VariableNumberConfig {
      *    |     | *
      *    |     |
      */
-    public static final VariableNumber VARIABLE_NUMBER_4_9 = VariableNumber.builder()
-                                                                           .top(Line.builder()
+    public static final VariableDigit VARIABLE_NUMBER_4_9 = VariableDigit.builder()
+                                                                         .top(Line.builder()
                                                                                     .left(LINE)
                                                                                     .body(BLANK)
                                                                                     .right(LINE)
                                                                                     .build())
-                                                                           .bottom(Line.builder()
+                                                                         .bottom(Line.builder()
                                                                                        .left(BLANK)
                                                                                        .body(BLANK)
                                                                                        .right(LINE)
                                                                                        .build())
-                                                                           .build();
+                                                                         .build();
     /*   *
      *  __
      * |    *
@@ -94,18 +94,18 @@ public class VariableNumberConfig {
      *    | *
      *  __|
      */
-    public static final VariableNumber VARIABLE_NUMBER_5 = VariableNumber.builder()
-                                                                         .top(Line.builder()
+    public static final VariableDigit VARIABLE_NUMBER_5 = VariableDigit.builder()
+                                                                       .top(Line.builder()
                                                                                   .left(LINE)
                                                                                   .body(BLANK)
                                                                                   .right(BLANK)
                                                                                   .build())
-                                                                         .bottom(Line.builder()
+                                                                       .bottom(Line.builder()
                                                                                      .left(BLANK)
                                                                                      .body(BLANK)
                                                                                      .right(LINE)
                                                                                      .build())
-                                                                         .build();
+                                                                       .build();
     /*   *
      *  __
      * |    *
@@ -113,20 +113,20 @@ public class VariableNumberConfig {
      * |  | *
      * |__|
      */
-    public static final VariableNumber VARIABLE_NUMBER_6 = VariableNumber.builder()
-                                                                         .top(Line.builder()
+    public static final VariableDigit VARIABLE_NUMBER_6 = VariableDigit.builder()
+                                                                       .top(Line.builder()
                                                                                   .left(LINE)
                                                                                   .body(BLANK)
                                                                                   .right(BLANK)
                                                                                   .build())
-                                                                         .bottom(Line.builder()
+                                                                       .bottom(Line.builder()
                                                                                      .left(LINE)
                                                                                      .body(BLANK)
                                                                                      .right(LINE)
                                                                                      .build())
-                                                                         .build();
+                                                                       .build();
 
-    public static Map<Integer, VariableNumber> variableNumberMap = Map.of(
+    public static Map<Integer, VariableDigit> MAP = Map.of(
             0, VARIABLE_NUMBER_0_8,
             1, VARIABLE_NUMBER_1_3_7,
             2, VARIABLE_NUMBER_2,

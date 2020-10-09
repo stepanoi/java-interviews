@@ -1,3 +1,5 @@
+package digital;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -5,8 +7,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class TextScannerTest {
-    private final TextScanner unit = new TextScanner();
+public class DigitalTextScannerTest {
+    private final DigitalTextScanner unit = new DigitalTextScanner();
 
     @Test
     public void should_match_123456789() {
@@ -189,7 +191,7 @@ public class TextScannerTest {
             unit.scan(input);
         });
 
-        assertEquals("Line needs to be in multiples of " + TextScanner.minWidth, exception.getMessage());
+        assertEquals("Line needs to be in multiples of " + DigitalTextScanner.MIN_WIDTH, exception.getMessage());
     }
 
     @Test
@@ -200,7 +202,7 @@ public class TextScannerTest {
                        "| || || || || || || || || |\n" +
                        "|_||_||_||_||_||_||_||_||_|";
 
-        assertEquals("000000000", unit.scan(input));
+        assertEquals("000000000", unit.scan(input, true));
     }
 
     @Test
@@ -210,7 +212,7 @@ public class TextScannerTest {
                        "| || || || || || || || || |\n" +
                        "|_||_||_||_||_||_||_||_||_|";
 
-        assertEquals("?????????ILL", unit.scan(input));
+        assertEquals("?????????ILL", unit.scan(input, true));
     }
 
     @Test
