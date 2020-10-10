@@ -1,10 +1,10 @@
 package digital.container;
 
 import digital.model.Number;
-import digital.model.Task;
-import digital.processor.AbstractDigitalNumberProcessor;
+import digital.model.ScanConfig;
 import digital.processor.DigitalNumberProcessor;
-import digital.processor.VariableDigitalNumberProcessor;
+import digital.processor.EnhancedDigitalNumberProcessor;
+import digital.processor.NormalDigitalNumberProcessor;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,15 +21,15 @@ public class DigitalNumberContainer {
     private final int width;
     private final boolean variableMode;
     private final boolean singleEmptyLineSeparator;
-    private final AbstractDigitalNumberProcessor digitalTextProcessor;
+    private final DigitalNumberProcessor digitalTextProcessor;
     private final List<String> results;
 
-    public DigitalNumberContainer(final Task task) {
-        this.lines = task.getInput().split(LINE_SEPARATOR);
-        this.width = task.getWidth();
-        this.variableMode = task.isVariableMode();
-        this.singleEmptyLineSeparator = task.isSingleEmptyLineSeparator();
-        this.digitalTextProcessor = variableMode ? new VariableDigitalNumberProcessor() : new DigitalNumberProcessor();
+    public DigitalNumberContainer(final String input, final ScanConfig scanConfig) {
+        this.lines = input.split(LINE_SEPARATOR);
+        this.width = scanConfig.getWidth();
+        this.variableMode = scanConfig.isVariableMode();
+        this.singleEmptyLineSeparator = scanConfig.isSingleEmptyLineSeparator();
+        this.digitalTextProcessor = scanConfig.isVariableMode() ? new EnhancedDigitalNumberProcessor() : new NormalDigitalNumberProcessor();
         this.results = new ArrayList<>();
     }
 

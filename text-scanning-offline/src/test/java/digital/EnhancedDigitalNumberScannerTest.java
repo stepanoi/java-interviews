@@ -1,6 +1,6 @@
 package digital;
 
-import digital.model.Task;
+import digital.model.ScanConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -16,6 +16,25 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class EnhancedDigitalNumberScannerTest {
     private final DigitalNumberScanner unit = new DigitalNumberScanner();
+
+    public static Stream<Arguments> should_throw_exception_when_lines_length_is_not_exactly_product_of_custom_width_and_max_digits_per_line() {
+        return Stream.of(
+                //space at end
+                Arguments.of(" __  __  __  __  __  __  __  __  __  \n" +
+                             "|  ||  ||  ||  ||  ||  ||  ||  ||  | \n" +
+                             "|__||__||__||__||__||__||__||__||__| ", 4),
+
+                //space at start
+                Arguments.of("  __  __  __  __  __  __  __  __  __ \n" +
+                             " |  ||  ||  ||  ||  ||  ||  ||  ||  |\n" +
+                             " |__||__||__||__||__||__||__||__||__|", 4),
+
+                //space at start and end
+                Arguments.of("  __  __  __  __  __  __  __  __  __  \n" +
+                             " |  ||  ||  ||  ||  ||  ||  ||  ||  | \n" +
+                             " |__||__||__||__||__||__||__||__||__| ", 4)
+        );
+    }
 
     @ParameterizedTest
     @ValueSource(strings = {
@@ -171,28 +190,26 @@ public class EnhancedDigitalNumberScannerTest {
         String expected = "123456789\n" +
                           "123456789\n" +
                           "123456789";
-        assertEquals(expected, unit.scan(Task.builder()
-                                             .input(input)
-                                             .width(MIN_WIDTH)
-                                             .variableMode(false)
-                                             .singleEmptyLineSeparator(false)
-                                             .build()));
+        assertEquals(expected, unit.scan(input, ScanConfig.builder()
+                                                          .width(MIN_WIDTH)
+                                                          .variableMode(false)
+                                                          .singleEmptyLineSeparator(false)
+                                                          .build()));
     }
-        
+
     @Test
     public void should_match_variable_height() {
-       String input = " _  _  _  _  _  _  _  _  _ \n" +
+        String input = " _  _  _  _  _  _  _  _  _ \n" +
                        "| || || || || || || || || |\n" +
                        "| || || || || || || || || |\n" +
                        "| || || || || || || || || |\n" +
                        "|_||_||_||_||_||_||_||_||_|";
-        
-        assertEquals("000000000", unit.scan(Task.builder()
-                                                .input(input)
-                                                .width(MIN_WIDTH)
-                                                .variableMode(true)
-                                                .singleEmptyLineSeparator(true)
-                                                .build()));
+
+        assertEquals("000000000", unit.scan(input, ScanConfig.builder()
+                                                             .width(MIN_WIDTH)
+                                                             .variableMode(true)
+                                                             .singleEmptyLineSeparator(true)
+                                                             .build()));
     }
 
     @Test
@@ -203,12 +220,11 @@ public class EnhancedDigitalNumberScannerTest {
                        "| || || || || || || || || |\n" +
                        "|_||_||_||_||_||_||_||_||_|";
 
-        assertEquals("?00000000ILL", unit.scan(Task.builder()
-                                                   .input(input)
-                                                   .width(MIN_WIDTH)
-                                                   .variableMode(true)
-                                                   .singleEmptyLineSeparator(true)
-                                                   .build()));
+        assertEquals("?00000000ILL", unit.scan(input, ScanConfig.builder()
+                                                                .width(MIN_WIDTH)
+                                                                .variableMode(true)
+                                                                .singleEmptyLineSeparator(true)
+                                                                .build()));
     }
 
     @Test
@@ -218,12 +234,11 @@ public class EnhancedDigitalNumberScannerTest {
                        "| || || || || || || || || |\n" +
                        "|_||_||_||_||_||_||_||_||_|";
 
-        assertEquals("?????????ILL", unit.scan(Task.builder()
-                                                   .input(input)
-                                                   .width(MIN_WIDTH)
-                                                   .variableMode(true)
-                                                   .singleEmptyLineSeparator(true)
-                                                   .build()));
+        assertEquals("?????????ILL", unit.scan(input, ScanConfig.builder()
+                                                                .width(MIN_WIDTH)
+                                                                .variableMode(true)
+                                                                .singleEmptyLineSeparator(true)
+                                                                .build()));
     }
 
     @Test
@@ -232,43 +247,22 @@ public class EnhancedDigitalNumberScannerTest {
                        "|  ||  ||  ||  ||  ||  ||  ||  ||  |\n" +
                        "|__||__||__||__||__||__||__||__||__|";
 
-        assertEquals("000000000", unit.scan(Task.builder()
-                                                .input(input)
-                                                .width(4)
-                                                .variableMode(false)
-                                                .singleEmptyLineSeparator(true)
-                                                .build()));
-    }
-    
-    public static Stream<Arguments> should_throw_exception_when_lines_length_is_not_exactly_product_of_custom_width_and_max_digits_per_line() {
-        return Stream.of(
-                //space at end
-                Arguments.of(" __  __  __  __  __  __  __  __  __  \n" +
-                             "|  ||  ||  ||  ||  ||  ||  ||  ||  | \n" +
-                             "|__||__||__||__||__||__||__||__||__| ",  4),
-
-                //space at start
-                Arguments.of("  __  __  __  __  __  __  __  __  __ \n" +
-                             " |  ||  ||  ||  ||  ||  ||  ||  ||  |\n" +
-                             " |__||__||__||__||__||__||__||__||__|",  4),
-
-                //space at start and end
-                Arguments.of("  __  __  __  __  __  __  __  __  __  \n" +
-                             " |  ||  ||  ||  ||  ||  ||  ||  ||  | \n" +
-                             " |__||__||__||__||__||__||__||__||__| ",  4)
-        );
+        assertEquals("000000000", unit.scan(input, ScanConfig.builder()
+                                                             .width(4)
+                                                             .variableMode(false)
+                                                             .singleEmptyLineSeparator(true)
+                                                             .build()));
     }
 
     @ParameterizedTest
     @MethodSource
     public void should_throw_exception_when_lines_length_is_not_exactly_product_of_custom_width_and_max_digits_per_line(String input, int width) {
-        Exception exception = assertThrows(IllegalStateException.class, () -> unit.scan(Task.builder()
-                                                                                            .input(input)
-                                                                                            .width(width)
-                                                                                            .variableMode(true)
-                                                                                            .singleEmptyLineSeparator(true)
-                                                                                            .build()));
+        Exception exception = assertThrows(IllegalStateException.class, () -> unit.scan(input, ScanConfig.builder()
+                                                                                                         .width(width)
+                                                                                                         .variableMode(true)
+                                                                                                         .singleEmptyLineSeparator(true)
+                                                                                                         .build()));
 
-        assertEquals("Line needs to have exactly " + MAX_DIGITS_PER_LINE + " digits and " + MAX_DIGITS_PER_LINE * width  + " characters long", exception.getMessage());
+        assertEquals("Line needs to have exactly " + MAX_DIGITS_PER_LINE + " digits and " + MAX_DIGITS_PER_LINE * width + " characters long", exception.getMessage());
     }
 }

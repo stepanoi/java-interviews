@@ -7,8 +7,7 @@ import lombok.ToString;
 @Builder
 @Getter
 @ToString
-public class Task {
-    private final String input;
+public class ScanConfig {
     private final int width;
     private final boolean variableMode;
     private final boolean singleEmptyLineSeparator;
