@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FileInputTest {
     private final DigitalNumberScanner unit = new DigitalNumberScanner();
-
+    
     public static Stream<Arguments> should_read_from_file_and_match() {
         return Stream.of(
                 Arguments.of("input/singleChunk", "000000000"),

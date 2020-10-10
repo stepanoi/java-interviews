@@ -1,6 +1,7 @@
 package digital.container;
 
 import digital.model.Number;
+import digital.model.Task;
 import digital.processor.AbstractDigitalNumberProcessor;
 import digital.processor.DigitalNumberProcessor;
 import digital.processor.VariableDigitalNumberProcessor;
@@ -19,13 +20,15 @@ public class DigitalNumberContainer {
     private final String[] lines;
     private final int width;
     private final boolean variableMode;
+    private final boolean singleEmptyLineSeparator;
     private final AbstractDigitalNumberProcessor digitalTextProcessor;
     private final List<String> results;
 
-    public DigitalNumberContainer(final String input, final int width, final boolean variableMode) {
-        this.lines = input.split(LINE_SEPARATOR);
-        this.width = width;
-        this.variableMode = variableMode;
+    public DigitalNumberContainer(final Task task) {
+        this.lines = task.getInput().split(LINE_SEPARATOR);
+        this.width = task.getWidth();
+        this.variableMode = task.isVariableMode();
+        this.singleEmptyLineSeparator = task.isSingleEmptyLineSeparator();
         this.digitalTextProcessor = variableMode ? new VariableDigitalNumberProcessor() : new DigitalNumberProcessor();
         this.results = new ArrayList<>();
     }
@@ -49,7 +52,7 @@ public class DigitalNumberContainer {
 
         public DigitalNumberIterator() {
             this.start = newStartLine(lines, 0, lines.length);
-            this.end = newLinePos(lines, 0);
+            this.end = newLinePos(lines, start);
             this.initialised = false;
         }
 
@@ -88,18 +91,22 @@ public class DigitalNumberContainer {
                          .build();
         }
 
+        // This method finds the next new line
         private int newLinePos(String[] lines, int previousEnd) {
             if (previousEnd == lines.length) {
+                //we have reached the end of processing
                 return previousEnd;
             }
 
+            // iterate from the previousEnd + 1 and find the first occurrence of an empty line
             int newLinePos = IntStream.range(previousEnd + 1, lines.length)
-                                      .limit(lines.length)
                                       .filter(value -> lines[value].trim().isEmpty())
                                       .findFirst()
                                       .orElse(lines.length);
-
-            if (newLinePos - previousEnd < MIN_HEIGHT) {
+            
+            // when singleEmptyLineSeparator is false, we recursively find the next new line
+            // when we exceed the min height of a number, it means we should stop the recursion as the new line now is the end for this number
+            if (!singleEmptyLineSeparator && newLinePos - previousEnd < MIN_HEIGHT) {
                 return newLinePos(lines, newLinePos);
             }
 
@@ -108,6 +115,7 @@ public class DigitalNumberContainer {
 
         private int newStartLine(final String[] lines, int previousStart, int newLinePos) {
             if (lines.length > 0 && lines[previousStart].trim().isEmpty()) {
+                // we iterate from previousStart + 1 and stop at the new line pos
                 return IntStream.range(previousStart + 1, lines.length)
                                 .limit(newLinePos)
                                 .filter(value -> !lines[value].trim().isEmpty())

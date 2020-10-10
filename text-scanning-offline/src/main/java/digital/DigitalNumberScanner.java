@@ -2,6 +2,7 @@ package digital;
 
 import digital.container.DigitalNumberContainer;
 import digital.model.Number;
+import digital.model.Task;
 
 import java.util.Iterator;
 
@@ -10,19 +11,16 @@ import static digital.container.DigitalNumberContainer.MIN_WIDTH;
 public final class DigitalNumberScanner { ;
 
     public String scan(final String input) {
-        return scan(input, MIN_WIDTH, false);
+        return scan(Task.builder()
+                        .input(input)
+                        .width(MIN_WIDTH)
+                        .variableMode(false)
+                        .singleEmptyLineSeparator(true)
+                        .build());
     }
-
-    public String scan(final String input, final int width) {
-        return scan(input, width, width == MIN_WIDTH);
-    }
-
-    public String scan(final String input, final boolean variable) {
-        return scan(input, MIN_WIDTH, variable);
-    }
-
-    private String scan(final String input, final int width, final boolean variable) {
-        DigitalNumberContainer digitalNumberContainer = new DigitalNumberContainer(input, width, variable);
+ 
+    public String scan(final Task task) {
+        DigitalNumberContainer digitalNumberContainer = new DigitalNumberContainer(task);
         Number number;
         Iterator<Number> iterator = digitalNumberContainer.iterator();
         while(iterator.hasNext()) {

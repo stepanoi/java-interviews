@@ -37,7 +37,7 @@ public class ManyNumbersTest {
 
         //Now we digitise these numbers into one massive String
         String generated = expected.stream()
-                                  .map(e -> generate(e) + System.lineSeparator())
+                                  .map(number -> generate(number) + System.lineSeparator())
                                   .collect(Collectors.joining());
 
         //Print it for illustrative purposes only
@@ -48,14 +48,14 @@ public class ManyNumbersTest {
         assertEquals(expected.stream().collect(Collectors.joining(System.lineSeparator())), unit.scan(generated));
     }
 
-    private String generate(String s) {
-        List<Digit> digits = Arrays.stream(s.split(""))
-                                   .map(e1 -> DigitConfig.MAP.entrySet()
+    private String generate(String number) {
+        List<Digit> digits = Arrays.stream(number.split(""))
+                                   .map(textDigit -> DigitConfig.MAP.entrySet()
                                                              .stream()
-                                                             .filter(e -> e.getValue() == Integer.parseInt(e1))
+                                                             .filter(e -> e.getValue() == Integer.parseInt(textDigit))
                                                              .map(Map.Entry::getKey)
                                                              .findFirst()
-                                                             .get())
+                                                             .orElse(null))
                                    .collect(Collectors.toList());
 
         StringBuilder builder = new StringBuilder();
