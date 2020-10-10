@@ -126,7 +126,7 @@ public class VariableDigitConfig {
                                                                                      .build())
                                                                        .build();
 
-    public static Map<Integer, VariableDigit> MAP = Map.of(
+    public static final Map<Integer, VariableDigit> MAP = Map.of(
             0, VARIABLE_NUMBER_0_8,
             1, VARIABLE_NUMBER_1_3_7,
             2, VARIABLE_NUMBER_2,

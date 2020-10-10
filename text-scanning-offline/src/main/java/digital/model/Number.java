@@ -7,7 +7,7 @@ import lombok.ToString;
 @Builder
 @Getter
 @ToString
-public class Block {
+public class Number {
     private final String[] lines;
     private final int start;
     private final int end;

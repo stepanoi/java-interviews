@@ -9,7 +9,7 @@ import static digital.model.Fill.BAR;
 import static digital.model.Fill.BLANK;
 import static digital.model.Fill.LINE;
 
-public class DigitConfig {
+public final class DigitConfig {
     /*
      *  _
      * |_|
@@ -33,7 +33,7 @@ public class DigitConfig {
                                                               .build())
                                                 .build();
 
-    public static Map<Digit, Integer> MAP = Map.of(
+    public static final Map<Digit, Integer> MAP = Map.of(
             /*
              *  -
              * | |

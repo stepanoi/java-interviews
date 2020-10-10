@@ -17,11 +17,11 @@ import static digital.util.LineUtils.matchEdge;
 import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.stripToNull;
 
-public class VariableDigitalTextProcessor extends AbstractDigitalTextProcessor {
+public final class VariableDigitalNumberProcessor extends AbstractDigitalNumberProcessor {
     
     @Override
-    public Integer value(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
-        Integer value = super.handle(lines, firstLinePos, middleLinePos, lastLinePos);
+    public Integer recognise(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
+        Integer value = super.read(lines, firstLinePos, middleLinePos, lastLinePos);
 
         Optional<VariableDigit> variableDigit = buildVariableDigit(lines, firstLinePos, middleLinePos, lastLinePos);
 

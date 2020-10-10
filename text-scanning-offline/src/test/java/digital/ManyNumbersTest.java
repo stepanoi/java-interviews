@@ -13,13 +13,16 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LargeMultilineTest {
+public class ManyNumbersTest {
+
+    private static final int TOTAL_NUMBERS = 400;
 
     @Test
     public void should_match_generated_numbers_test() {
-        List<String> strings = new Random()
+        //Let's randomly generate the total number of numbers we want
+        List<String> expected = new Random()
                 .ints(0, 999999999)
-                .limit(400)
+                .limit(TOTAL_NUMBERS)
                 .mapToObj(value -> {
                     StringBuilder s = new StringBuilder(value + "");
                     int fillRequired = 9 - s.length();
@@ -32,13 +35,17 @@ public class LargeMultilineTest {
                 })
                 .collect(Collectors.toList());
 
-        String generated = strings.stream()
+        //Now we digitise these numbers into one massive String
+        String generated = expected.stream()
                                   .map(e -> generate(e) + System.lineSeparator())
                                   .collect(Collectors.joining());
 
+        //Print it for illustrative purposes only
         System.out.println(generated);
-        DigitalTextScanner unit = new DigitalTextScanner();
-        assertEquals(strings.stream().collect(Collectors.joining(System.lineSeparator())), unit.scan(generated));
+        
+        //Kick of the recognition process and assert we match what we generated at the start
+        DigitalNumberScanner unit = new DigitalNumberScanner();
+        assertEquals(expected.stream().collect(Collectors.joining(System.lineSeparator())), unit.scan(generated));
     }
 
     private String generate(String s) {
