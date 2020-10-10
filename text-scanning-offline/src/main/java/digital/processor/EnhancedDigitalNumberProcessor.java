@@ -23,7 +23,7 @@ public final class EnhancedDigitalNumberProcessor extends DigitalNumberProcessor
 
     @Override
     public Integer recognise(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
-        Integer value = super.read(lines, firstLinePos, middleLinePos, lastLinePos);
+        Integer value = super.recognise(lines, firstLinePos, middleLinePos, lastLinePos);
         
         if (nonNull(value)) {
             VariableDigit current = buildVariableDigit(lines, firstLinePos, middleLinePos, lastLinePos);

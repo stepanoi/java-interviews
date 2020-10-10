@@ -4,7 +4,7 @@ import digital.model.Number;
 import digital.model.ScanConfig;
 import digital.processor.DigitalNumberProcessor;
 import digital.processor.EnhancedDigitalNumberProcessor;
-import digital.processor.NormalDigitalNumberProcessor;
+import digital.processor.Processor;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,7 +21,7 @@ public class DigitalNumberContainer {
     private final int width;
     private final boolean variableMode;
     private final boolean singleEmptyLineSeparator;
-    private final DigitalNumberProcessor digitalTextProcessor;
+    private final Processor digitalTextProcessor;
     private final List<String> results;
 
     public DigitalNumberContainer(final String input, final ScanConfig scanConfig) {
@@ -29,7 +29,7 @@ public class DigitalNumberContainer {
         this.width = scanConfig.getWidth();
         this.variableMode = scanConfig.isVariableMode();
         this.singleEmptyLineSeparator = scanConfig.isSingleEmptyLineSeparator();
-        this.digitalTextProcessor = scanConfig.isVariableMode() ? new EnhancedDigitalNumberProcessor() : new NormalDigitalNumberProcessor();
+        this.digitalTextProcessor = scanConfig.isVariableMode() ? new EnhancedDigitalNumberProcessor() : new DigitalNumberProcessor();
         this.results = new ArrayList<>();
     }
 

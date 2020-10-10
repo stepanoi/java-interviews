@@ -17,11 +17,12 @@ import static digital.container.DigitalNumberContainer.MAX_DIGITS_PER_LINE;
 import static digital.container.DigitalNumberContainer.MIN_WIDTH;
 
 @Slf4j
-public abstract class DigitalNumberProcessor {
+public class DigitalNumberProcessor implements Processor {
     private static final String UNKNOWN = "?";
     private static final String ILLEGAL = "ILL";
     private static final String EMPTY = "";
 
+    @Override
     public String process(final Number number, final int width) {
         int lineLength = lineLength(number.getLines(), width);
         
@@ -56,9 +57,8 @@ public abstract class DigitalNumberProcessor {
         return result;
     }
 
-    public abstract Integer recognise(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos);
-
-    public Integer read(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
+    @Override
+    public Integer recognise(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
         Digit digit = buildDigit(lines, firstLinePos, middleLinePos, lastLinePos);
         return DigitConfig.MAP.get(digit);
     }
