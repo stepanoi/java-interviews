@@ -178,21 +178,37 @@ public class EnhancedDigitalNumberScannerTest {
                                              .singleEmptyLineSeparator(false)
                                              .build()));
     }
-    
+        
     @Test
     public void should_match_variable_height() {
-        String input = " _  _  _  _  _  _  _  _  _ \n" +
+       String input = " _  _  _  _  _  _  _  _  _ \n" +
                        "| || || || || || || || || |\n" +
                        "| || || || || || || || || |\n" +
                        "| || || || || || || || || |\n" +
                        "|_||_||_||_||_||_||_||_||_|";
-
+        
         assertEquals("000000000", unit.scan(Task.builder()
                                                 .input(input)
                                                 .width(MIN_WIDTH)
                                                 .variableMode(true)
                                                 .singleEmptyLineSeparator(true)
                                                 .build()));
+    }
+
+    @Test
+    public void should_not_match_variable_number() {
+        String input = "*_  _  _  _  _  _  _  _  _ \n" +
+                       "* || || || || || || || || |\n" +
+                       "| || || || || || || || || |\n" +
+                       "| || || || || || || || || |\n" +
+                       "|_||_||_||_||_||_||_||_||_|";
+
+        assertEquals("?00000000ILL", unit.scan(Task.builder()
+                                                   .input(input)
+                                                   .width(MIN_WIDTH)
+                                                   .variableMode(true)
+                                                   .singleEmptyLineSeparator(true)
+                                                   .build()));
     }
 
     @Test
@@ -253,6 +269,6 @@ public class EnhancedDigitalNumberScannerTest {
                                                                                             .singleEmptyLineSeparator(true)
                                                                                             .build()));
 
-        assertEquals("Line needs have exactly " + MAX_DIGITS_PER_LINE + " digits and " + MAX_DIGITS_PER_LINE * width  + " characters long", exception.getMessage());
+        assertEquals("Line needs to have exactly " + MAX_DIGITS_PER_LINE + " digits and " + MAX_DIGITS_PER_LINE * width  + " characters long", exception.getMessage());
     }
 }

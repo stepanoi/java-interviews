@@ -133,10 +133,9 @@ public class DigitalNumberScannerTest {
             
     })
     public void should_match_multiple_numbers(String input) {
-        String expected = "123456789\n" +
-                          "123456789\n" +
-                          "123456789";
-        assertEquals(expected, unit.scan(input));
+       assertEquals("123456789\n" +
+                     "123456789\n" +
+                     "123456789", unit.scan(input));
     }
     
     public static Stream<Arguments> should_throw_exception_when_lines_of_different_length() {
@@ -163,7 +162,7 @@ public class DigitalNumberScannerTest {
     @ParameterizedTest
     @MethodSource
     public void should_throw_exception_when_lines_of_different_length(String input, String expected) {
-       Exception exception = assertThrows(IllegalStateException.class, () -> unit.scan(input));
+        Exception exception = assertThrows(IllegalStateException.class, () -> unit.scan(input));
         
         assertEquals("Different Line lengths detected " + expected, exception.getMessage());
     }
@@ -267,7 +266,7 @@ public class DigitalNumberScannerTest {
 
             //two lines only
             "    _  _     _  _  _  _  _ \n" +
-            "  | _| _||_||_ |_   ||_||_|\n"
+            "  | _| _||_||_ |_   ||_||_|\n",
     })
     public void should_throw_exception_when_lines_are_less_than_expected(String value) {
         Exception exception = assertThrows(IllegalStateException.class, () -> unit.scan(value));
@@ -290,6 +289,11 @@ public class DigitalNumberScannerTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
+            //single digit
+            " _ \n" +
+            "|_|\n" +
+            "|_|\n",
+            
             //9 not well formed = 26 chars long
             "    _  _     _  _  _  _  _\n" +
             "  | _| _||_||_ |_   ||_||_\n" +
@@ -338,6 +342,6 @@ public class DigitalNumberScannerTest {
     public void should_throw_exception_when_lines_length_is_not_exactly_product_of_min_width_and_max_digits_per_line(String input) {
         Exception exception = assertThrows(IllegalStateException.class, () -> unit.scan(input));
 
-        assertEquals("Line needs have exactly " + MAX_DIGITS_PER_LINE + " digits and " + MAX_DIGITS_PER_LINE * MIN_WIDTH  + " characters long", exception.getMessage());
+        assertEquals("Line needs to have exactly " + MAX_DIGITS_PER_LINE + " digits and " + MAX_DIGITS_PER_LINE * MIN_WIDTH  + " characters long", exception.getMessage());
     }
 }

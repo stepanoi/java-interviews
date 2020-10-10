@@ -78,11 +78,11 @@ public abstract class AbstractDigitalNumberProcessor {
         Integer lineLength = lineLengths.get(0);
         
         if (width == MIN_WIDTH && lineLength != MAX_DIGITS_PER_LINE * MIN_WIDTH) {
-            throw new IllegalStateException("Line needs have exactly " + MAX_DIGITS_PER_LINE + " digits and " + MIN_WIDTH * MAX_DIGITS_PER_LINE + " characters long");
+            throw new IllegalStateException("Line needs to have exactly " + MAX_DIGITS_PER_LINE + " digits and " + MIN_WIDTH * MAX_DIGITS_PER_LINE + " characters long");
         }
         
         if(width != MIN_WIDTH && lineLength != MAX_DIGITS_PER_LINE * width) {
-            throw new IllegalStateException("Line needs have exactly " + MAX_DIGITS_PER_LINE + " digits and " + width * MAX_DIGITS_PER_LINE + " characters long");
+            throw new IllegalStateException("Line needs to have exactly " + MAX_DIGITS_PER_LINE + " digits and " + width * MAX_DIGITS_PER_LINE + " characters long");
         }
 
         return lineLength;

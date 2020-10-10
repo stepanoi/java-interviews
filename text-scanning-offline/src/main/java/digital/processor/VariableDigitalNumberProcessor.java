@@ -4,10 +4,8 @@ import digital.config.VariableDigitConfig;
 import digital.model.Fill;
 import digital.model.Line;
 import digital.model.VariableDigit;
-import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -22,17 +20,15 @@ import static org.apache.commons.lang3.StringUtils.stripToNull;
     It can be activated by specifying Task.variableMode = true
  */
 public final class VariableDigitalNumberProcessor extends AbstractDigitalNumberProcessor {
-    
+
     @Override
     public Integer recognise(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
         Integer value = super.read(lines, firstLinePos, middleLinePos, lastLinePos);
-
-        Optional<VariableDigit> variableDigit = buildVariableDigit(lines, firstLinePos, middleLinePos, lastLinePos);
-
-        if (nonNull(value) && variableDigit.isPresent()) {
-
+        
+        if (nonNull(value)) {
+            VariableDigit current = buildVariableDigit(lines, firstLinePos, middleLinePos, lastLinePos);
+            
             VariableDigit ref = VariableDigitConfig.MAP.get(value);
-            VariableDigit current = variableDigit.get();
 
             boolean topEdgeMatch = matchEdge(current.getTop(), ref.getTop());
 
@@ -49,23 +45,21 @@ public final class VariableDigitalNumberProcessor extends AbstractDigitalNumberP
                           .map(e -> finalValue)
                           .orElse(null);
         }
-        
+
         return value;
     }
 
-    private Optional<VariableDigit> buildVariableDigit(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
-        Optional<Line> top = variableLine(firstLinePos + 1, middleLinePos, lines);
-        Optional<Line> bottom = variableLine(middleLinePos + 1, lastLinePos, lines);
+    private VariableDigit buildVariableDigit(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
+        Line top = variableLine(firstLinePos + 1, middleLinePos, lines);
+        Line bottom = variableLine(middleLinePos + 1, lastLinePos, lines);
 
-        return top.isEmpty() && bottom.isEmpty()
-                ? Optional.empty()
-                : Optional.of(VariableDigit.builder()
-                                           .top(top.orElse(null))
-                                           .bottom(bottom.orElse(null))
-                                           .build());
+        return VariableDigit.builder()
+                            .top(top)
+                            .bottom(bottom)
+                            .build();
     }
 
-    private Optional<Line> variableLine(final int start, final int end, final List<String> lines) {
+    private Line variableLine(final int start, final int end, final List<String> lines) {
         String left = stripToNull(IntStream.range(start, end)
                                            .mapToObj(value -> lines.get(value).charAt(0))
                                            .map(String::valueOf)
@@ -88,12 +82,10 @@ public final class VariableDigitalNumberProcessor extends AbstractDigitalNumberP
                                             .distinct()
                                             .collect(Collectors.joining()));
 
-        return ObjectUtils.anyNotNull(left, body, right)
-                ? Optional.of(Line.builder()
-                                  .left(Fill.from(left))
-                                  .body(Fill.from(body))
-                                  .right(Fill.from(right))
-                                  .build())
-                : Optional.empty();
+        return Line.builder()
+                   .left(Fill.from(left))
+                   .body(Fill.from(body))
+                   .right(Fill.from(right))
+                   .build();
     }
 }

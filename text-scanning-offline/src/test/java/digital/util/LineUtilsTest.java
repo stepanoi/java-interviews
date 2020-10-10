@@ -34,10 +34,10 @@ class LineUtilsTest {
         return Stream.of(
                 Arguments.of(Line.builder().build(), Line.builder().build(), true),
                 Arguments.of(Line.builder().body(BAR).build(), Line.builder().body(BAR).build(), true),
-                Arguments.of(Line.builder().body(BAR).build(), Line.builder().body(LINE).build(), true),
+                Arguments.of(Line.builder().body(BAR).build(), Line.builder().body(LINE).build(), false),
                 
                 Arguments.of(Line.builder().build(), Line.builder().body(BAR).build(), true),
-                Arguments.of(Line.builder().body(BAR).build(), Line.builder().build(), true),
+                Arguments.of(Line.builder().body(BAR).build(), Line.builder().build(), false),
                 
                 Arguments.of(Line.builder().body(BAR).build(), null, false),
                 Arguments.of(Line.builder().build(), null, false),
@@ -51,6 +51,6 @@ class LineUtilsTest {
     @ParameterizedTest
     @MethodSource
     public void should_match_body(Line current, Line ref, Boolean expected) {
-        Assertions.assertEquals(expected, LineUtils.matchEdge(current, ref));
+        Assertions.assertEquals(expected, LineUtils.matchBody(current, ref));
     }
 }
