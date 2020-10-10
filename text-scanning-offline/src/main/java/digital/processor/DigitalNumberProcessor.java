@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -60,7 +61,13 @@ public class DigitalNumberProcessor implements Processor {
     @Override
     public Integer recognise(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
         Digit digit = buildDigit(lines, firstLinePos, middleLinePos, lastLinePos);
-        return DigitConfig.MAP.get(digit);
+        Integer value = DigitConfig.MAP.get(digit);
+        
+        if(Objects.isNull(value)) {
+            log.info("Could not recognise " + digit);
+        }
+        
+        return value;
     }
 
     private int lineLength(final String[] lines, final int width) {

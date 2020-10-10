@@ -30,6 +30,8 @@ public final class DigitalNumberScanner {
             digitalNumberContainer.process(number);
         }
 
-        return digitalNumberContainer.getActualDigits();
+        String actualDigits = digitalNumberContainer.getActualDigits();
+        log.info("Result\n" + actualDigits);
+        return actualDigits;
     }
 }
