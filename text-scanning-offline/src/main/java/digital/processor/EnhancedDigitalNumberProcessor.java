@@ -4,6 +4,7 @@ import digital.config.VariableDigitConfig;
 import digital.model.Fill;
 import digital.model.Line;
 import digital.model.VariableDigit;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -61,10 +62,11 @@ public final class EnhancedDigitalNumberProcessor extends DigitalNumberProcessor
 
     private Line variableLine(final int start, final int end, final List<String> lines) {
         String left = stripToNull(IntStream.range(start, end)
-                                           .mapToObj(value -> lines.get(value).charAt(0))
+                                           .mapToObj(value -> StringUtils.left(lines.get(value), 1))
                                            .map(String::valueOf)
                                            .distinct()
                                            .collect(Collectors.joining()));
+        
         String body = stripToNull(IntStream.range(start, end)
                                            .mapToObj(value -> {
                                                String s = lines.get(value);
@@ -73,11 +75,9 @@ public final class EnhancedDigitalNumberProcessor extends DigitalNumberProcessor
                                            .map(String::valueOf)
                                            .distinct()
                                            .collect(Collectors.joining()));
+        
         String right = stripToNull(IntStream.range(start, end)
-                                            .mapToObj(value -> {
-                                                String s = lines.get(value);
-                                                return s.charAt(s.length() - 1);
-                                            })
+                                            .mapToObj(value -> StringUtils.right(lines.get(value), 1))
                                             .map(String::valueOf)
                                             .distinct()
                                             .collect(Collectors.joining()));
