@@ -77,11 +77,6 @@ public abstract class AbstractDigitalNumberProcessor {
 
         Integer lineLength = lineLengths.get(0);
         
-      /*  Integer lineLength = lineLengths.stream()
-                                        .filter(e -> e % MIN_WIDTH == 0)
-                                        .findFirst()
-                                        .orElseThrow(() -> new IllegalStateException("Line needs to be in multiples of " + MIN_WIDTH));
-*/
         if (width == MIN_WIDTH && lineLength != MAX_DIGITS_PER_LINE * MIN_WIDTH) {
             throw new IllegalStateException("Line needs have exactly " + MAX_DIGITS_PER_LINE + " digits and " + MIN_WIDTH * MAX_DIGITS_PER_LINE + " characters long");
         }

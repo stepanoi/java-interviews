@@ -17,6 +17,10 @@ import static digital.util.LineUtils.matchEdge;
 import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.stripToNull;
 
+/*
+    This class handles processing of digits that have variable width and height. It serves as an extension to the initial requirement.
+    It can be activated by specifying Task.variableMode = true
+ */
 public final class VariableDigitalNumberProcessor extends AbstractDigitalNumberProcessor {
     
     @Override

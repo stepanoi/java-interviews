@@ -50,7 +50,7 @@ public class DigitalNumberContainer {
         private int end;
         private boolean initialised;
 
-        public DigitalNumberIterator() {
+        private DigitalNumberIterator() {
             this.start = newStartLine(lines, 0, lines.length);
             this.end = newLinePos(lines, start);
             this.initialised = false;
