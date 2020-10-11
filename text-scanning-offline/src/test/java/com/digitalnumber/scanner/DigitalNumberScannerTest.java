@@ -1,5 +1,6 @@
-package digital;
+package com.digitalnumber.scanner;
 
+import com.digitalnumber.scanner.DigitalNumberScanner;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -8,8 +9,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
-import static digital.container.DigitalNumberContainer.MAX_DIGITS_PER_LINE;
-import static digital.container.DigitalNumberContainer.MIN_WIDTH;
+import static com.digitalnumber.scanner.container.DigitalNumberContainer.MAX_DIGITS_PER_LINE;
+import static com.digitalnumber.scanner.container.DigitalNumberContainer.MIN_WIDTH;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

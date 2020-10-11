@@ -1,20 +1,20 @@
-package digital;
+package com.digitalnumber.scanner;
 
-import digital.container.DigitalNumberContainer;
-import digital.model.Number;
-import digital.model.ScanConfig;
+import com.digitalnumber.scanner.container.DigitalNumberContainer;
+import com.digitalnumber.scanner.model.Number;
+import com.digitalnumber.scanner.model.ScanConfig;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Iterator;
 
-import static digital.container.DigitalNumberContainer.MIN_WIDTH;
+import static com.digitalnumber.scanner.container.DigitalNumberContainer.MIN_WIDTH;
 
 @Slf4j
 public final class DigitalNumberScanner {
 
     public String scan(final String input) {
         return scan(input, ScanConfig.builder()
-                                     .width(MIN_WIDTH)
+                                     .width(DigitalNumberContainer.MIN_WIDTH)
                                      .variableMode(false)
                                      .singleEmptyLineSeparator(true)
                                      .build());

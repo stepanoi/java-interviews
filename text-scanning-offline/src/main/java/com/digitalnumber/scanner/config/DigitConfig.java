@@ -1,13 +1,13 @@
-package digital.config;
+package com.digitalnumber.scanner.config;
 
-import digital.model.Digit;
-import digital.model.Line;
+import com.digitalnumber.scanner.model.Digit;
+import com.digitalnumber.scanner.model.Line;
 
 import java.util.Map;
 
-import static digital.model.Fill.BAR;
-import static digital.model.Fill.BLANK;
-import static digital.model.Fill.LINE;
+import static com.digitalnumber.scanner.model.Fill.BAR;
+import static com.digitalnumber.scanner.model.Fill.BLANK;
+import static com.digitalnumber.scanner.model.Fill.LINE;
 
 public final class DigitConfig {
     /*

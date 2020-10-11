@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>java-interview</groupId>
-    <artifactId>text-scanning-offline</artifactId>
+    <groupId>com.digitalnumber</groupId>
+    <artifactId>digital-number-scanner</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>text-scanning-offline</name>
+    <name>digital-number-scanner</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -1,10 +1,11 @@
-package digital.processor;
+package com.digitalnumber.scanner.processor;
 
-import digital.config.DigitConfig;
-import digital.model.Digit;
-import digital.model.Fill;
-import digital.model.Line;
-import digital.model.Number;
+import com.digitalnumber.scanner.config.DigitConfig;
+import com.digitalnumber.scanner.container.DigitalNumberContainer;
+import com.digitalnumber.scanner.model.Digit;
+import com.digitalnumber.scanner.model.Fill;
+import com.digitalnumber.scanner.model.Line;
+import com.digitalnumber.scanner.model.Number;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -14,8 +15,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static digital.container.DigitalNumberContainer.MAX_DIGITS_PER_LINE;
-import static digital.container.DigitalNumberContainer.MIN_WIDTH;
+import static com.digitalnumber.scanner.container.DigitalNumberContainer.*;
+
 
 @Slf4j
 public class DigitalNumberProcessor implements Processor {

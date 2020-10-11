@@ -1,6 +1,6 @@
-package digital.util;
+package com.digitalnumber.scanner.util;
 
-import digital.model.Line;
+import com.digitalnumber.scanner.model.Line;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -8,8 +8,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static digital.model.Fill.BAR;
-import static digital.model.Fill.LINE;
+import static com.digitalnumber.scanner.model.Fill.BAR;
+import static com.digitalnumber.scanner.model.Fill.LINE;
 
 class LineUtilsTest {
     public static Stream<Arguments> should_match_edge() {

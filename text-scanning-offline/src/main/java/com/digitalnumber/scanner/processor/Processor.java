@@ -1,6 +1,6 @@
-package digital.processor;
+package com.digitalnumber.scanner.processor;
 
-import digital.model.Number;
+import com.digitalnumber.scanner.model.Number;
 
 import java.util.List;
 

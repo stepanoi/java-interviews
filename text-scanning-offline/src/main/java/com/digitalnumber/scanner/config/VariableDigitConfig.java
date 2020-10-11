@@ -1,12 +1,12 @@
-package digital.config;
+package com.digitalnumber.scanner.config;
 
-import digital.model.Line;
-import digital.model.VariableDigit;
+import com.digitalnumber.scanner.model.Line;
+import com.digitalnumber.scanner.model.VariableDigit;
 
 import java.util.Map;
 
-import static digital.model.Fill.BLANK;
-import static digital.model.Fill.LINE;
+import static com.digitalnumber.scanner.model.Fill.BLANK;
+import static com.digitalnumber.scanner.model.Fill.LINE;
 
 public class VariableDigitConfig {
 

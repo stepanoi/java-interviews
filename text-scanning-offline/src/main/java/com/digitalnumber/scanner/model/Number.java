@@ -1,4 +1,4 @@
-package digital.model;
+package com.digitalnumber.scanner.model;
 
 import lombok.Builder;
 import lombok.Getter;

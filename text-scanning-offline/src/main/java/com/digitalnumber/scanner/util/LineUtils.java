@@ -1,6 +1,6 @@
-package digital.util;
+package com.digitalnumber.scanner.util;
 
-import digital.model.Line;
+import com.digitalnumber.scanner.model.Line;
 
 import java.util.Objects;
 

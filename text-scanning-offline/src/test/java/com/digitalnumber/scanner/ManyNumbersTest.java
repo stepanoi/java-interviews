@@ -1,8 +1,9 @@
-package digital;
+package com.digitalnumber.scanner;
 
-import digital.config.DigitConfig;
-import digital.model.Digit;
-import digital.model.Line;
+import com.digitalnumber.scanner.DigitalNumberScanner;
+import com.digitalnumber.scanner.config.DigitConfig;
+import com.digitalnumber.scanner.model.Digit;
+import com.digitalnumber.scanner.model.Line;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

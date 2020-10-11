@@ -1,9 +1,9 @@
-package digital.processor;
+package com.digitalnumber.scanner.processor;
 
-import digital.config.VariableDigitConfig;
-import digital.model.Fill;
-import digital.model.Line;
-import digital.model.VariableDigit;
+import com.digitalnumber.scanner.config.VariableDigitConfig;
+import com.digitalnumber.scanner.model.Fill;
+import com.digitalnumber.scanner.model.Line;
+import com.digitalnumber.scanner.model.VariableDigit;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static digital.util.LineUtils.matchBody;
-import static digital.util.LineUtils.matchEdge;
+import static com.digitalnumber.scanner.util.LineUtils.matchBody;
+import static com.digitalnumber.scanner.util.LineUtils.matchEdge;
 import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.stripToNull;
 
@@ -20,7 +20,7 @@ import static org.apache.commons.lang3.StringUtils.stripToNull;
     This class handles processing of digits that have variable width and height. It serves as an extension to the initial requirement.
     It can be activated by specifying Task.variableMode = true
  */
-public final class EnhancedDigitalNumberProcessor extends DigitalNumberProcessor {
+public final class EnhancedDigitalNumberProcessor extends com.digitalnumber.scanner.processor.DigitalNumberProcessor {
 
     @Override
     public Integer recognise(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {

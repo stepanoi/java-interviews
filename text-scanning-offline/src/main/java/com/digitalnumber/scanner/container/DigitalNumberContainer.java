@@ -1,10 +1,10 @@
-package digital.container;
+package com.digitalnumber.scanner.container;
 
-import digital.model.Number;
-import digital.model.ScanConfig;
-import digital.processor.DigitalNumberProcessor;
-import digital.processor.EnhancedDigitalNumberProcessor;
-import digital.processor.Processor;
+import com.digitalnumber.scanner.model.Number;
+import com.digitalnumber.scanner.model.ScanConfig;
+import com.digitalnumber.scanner.processor.DigitalNumberProcessor;
+import com.digitalnumber.scanner.processor.EnhancedDigitalNumberProcessor;
+import com.digitalnumber.scanner.processor.Processor;
 
 import java.util.ArrayList;
 import java.util.Iterator;
