@@ -9,6 +9,6 @@ import lombok.ToString;
 @ToString
 public class Number {
     private final String[] lines;
-    private final int start;
-    private final int end;
+    private final int      start;
+    private final int      end;
 }

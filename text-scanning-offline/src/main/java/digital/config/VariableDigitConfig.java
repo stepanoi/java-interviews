@@ -9,8 +9,8 @@ import static digital.model.Fill.BLANK;
 import static digital.model.Fill.LINE;
 
 public class VariableDigitConfig {
-    
-    
+
+
     /*   *    *
      *  --   --
      * |  | |  | *
@@ -18,18 +18,18 @@ public class VariableDigitConfig {
      * |  | |  | *
      * |__| |__|
      */
-    public static final VariableDigit VARIABLE_NUMBER_0_8 = VariableDigit.builder()
-                                                                         .top(Line.builder()
+    public static final VariableDigit VARIABLE_NUMBER_0_8   = VariableDigit.builder()
+                                                                           .top(Line.builder()
                                                                                     .left(LINE)
                                                                                     .body(BLANK)
                                                                                     .right(LINE)
                                                                                     .build())
-                                                                         .bottom(Line.builder()
+                                                                           .bottom(Line.builder()
                                                                                        .left(LINE)
                                                                                        .body(BLANK)
                                                                                        .right(LINE)
                                                                                        .build())
-                                                                         .build();
+                                                                           .build();
     /*   *    *    *
      *       --   --
      *    |    |    | *
@@ -39,15 +39,15 @@ public class VariableDigitConfig {
      */
     public static final VariableDigit VARIABLE_NUMBER_1_3_7 = VariableDigit.builder()
                                                                            .top(Line.builder()
-                                                                                      .left(BLANK)
-                                                                                      .body(BLANK)
-                                                                                      .right(LINE)
-                                                                                      .build())
+                                                                                    .left(BLANK)
+                                                                                    .body(BLANK)
+                                                                                    .right(LINE)
+                                                                                    .build())
                                                                            .bottom(Line.builder()
-                                                                                         .left(BLANK)
-                                                                                         .body(BLANK)
-                                                                                         .right(LINE)
-                                                                                         .build())
+                                                                                       .left(BLANK)
+                                                                                       .body(BLANK)
+                                                                                       .right(LINE)
+                                                                                       .build())
                                                                            .build();
     /*   *
      *  __
@@ -56,18 +56,18 @@ public class VariableDigitConfig {
      * |    *
      * |__
      */
-    public static final VariableDigit VARIABLE_NUMBER_2 = VariableDigit.builder()
-                                                                       .top(Line.builder()
-                                                                                  .left(BLANK)
-                                                                                  .body(BLANK)
-                                                                                  .right(LINE)
-                                                                                  .build())
-                                                                       .bottom(Line.builder()
-                                                                                     .left(LINE)
-                                                                                     .body(BLANK)
-                                                                                     .right(BLANK)
-                                                                                     .build())
-                                                                       .build();
+    public static final VariableDigit VARIABLE_NUMBER_2     = VariableDigit.builder()
+                                                                           .top(Line.builder()
+                                                                                    .left(BLANK)
+                                                                                    .body(BLANK)
+                                                                                    .right(LINE)
+                                                                                    .build())
+                                                                           .bottom(Line.builder()
+                                                                                       .left(LINE)
+                                                                                       .body(BLANK)
+                                                                                       .right(BLANK)
+                                                                                       .build())
+                                                                           .build();
     /*   *     *
      *        __
      * |  |  |  | *
@@ -75,18 +75,18 @@ public class VariableDigitConfig {
      *    |     | *
      *    |     |
      */
-    public static final VariableDigit VARIABLE_NUMBER_4_9 = VariableDigit.builder()
-                                                                         .top(Line.builder()
+    public static final VariableDigit VARIABLE_NUMBER_4_9   = VariableDigit.builder()
+                                                                           .top(Line.builder()
                                                                                     .left(LINE)
                                                                                     .body(BLANK)
                                                                                     .right(LINE)
                                                                                     .build())
-                                                                         .bottom(Line.builder()
+                                                                           .bottom(Line.builder()
                                                                                        .left(BLANK)
                                                                                        .body(BLANK)
                                                                                        .right(LINE)
                                                                                        .build())
-                                                                         .build();
+                                                                           .build();
     /*   *
      *  __
      * |    *
@@ -94,18 +94,18 @@ public class VariableDigitConfig {
      *    | *
      *  __|
      */
-    public static final VariableDigit VARIABLE_NUMBER_5 = VariableDigit.builder()
-                                                                       .top(Line.builder()
-                                                                                  .left(LINE)
-                                                                                  .body(BLANK)
-                                                                                  .right(BLANK)
-                                                                                  .build())
-                                                                       .bottom(Line.builder()
-                                                                                     .left(BLANK)
-                                                                                     .body(BLANK)
-                                                                                     .right(LINE)
-                                                                                     .build())
-                                                                       .build();
+    public static final VariableDigit VARIABLE_NUMBER_5     = VariableDigit.builder()
+                                                                           .top(Line.builder()
+                                                                                    .left(LINE)
+                                                                                    .body(BLANK)
+                                                                                    .right(BLANK)
+                                                                                    .build())
+                                                                           .bottom(Line.builder()
+                                                                                       .left(BLANK)
+                                                                                       .body(BLANK)
+                                                                                       .right(LINE)
+                                                                                       .build())
+                                                                           .build();
     /*   *
      *  __
      * |    *
@@ -113,18 +113,18 @@ public class VariableDigitConfig {
      * |  | *
      * |__|
      */
-    public static final VariableDigit VARIABLE_NUMBER_6 = VariableDigit.builder()
-                                                                       .top(Line.builder()
-                                                                                  .left(LINE)
-                                                                                  .body(BLANK)
-                                                                                  .right(BLANK)
-                                                                                  .build())
-                                                                       .bottom(Line.builder()
-                                                                                     .left(LINE)
-                                                                                     .body(BLANK)
-                                                                                     .right(LINE)
-                                                                                     .build())
-                                                                       .build();
+    public static final VariableDigit VARIABLE_NUMBER_6     = VariableDigit.builder()
+                                                                           .top(Line.builder()
+                                                                                    .left(LINE)
+                                                                                    .body(BLANK)
+                                                                                    .right(BLANK)
+                                                                                    .build())
+                                                                           .bottom(Line.builder()
+                                                                                       .left(LINE)
+                                                                                       .body(BLANK)
+                                                                                       .right(LINE)
+                                                                                       .build())
+                                                                           .build();
 
     public static final Map<Integer, VariableDigit> MAP = Map.of(
             0, VARIABLE_NUMBER_0_8,

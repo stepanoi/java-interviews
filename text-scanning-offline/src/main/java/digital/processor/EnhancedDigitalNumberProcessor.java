@@ -63,7 +63,6 @@ public final class EnhancedDigitalNumberProcessor extends DigitalNumberProcessor
     private Line variableLine(final int start, final int end, final List<String> lines) {
         String left = stripToNull(IntStream.range(start, end)
                                            .mapToObj(value -> StringUtils.left(lines.get(value), 1))
-                                           .map(String::valueOf)
                                            .distinct()
                                            .collect(Collectors.joining()));
         
@@ -78,7 +77,6 @@ public final class EnhancedDigitalNumberProcessor extends DigitalNumberProcessor
         
         String right = stripToNull(IntStream.range(start, end)
                                             .mapToObj(value -> StringUtils.right(lines.get(value), 1))
-                                            .map(String::valueOf)
                                             .distinct()
                                             .collect(Collectors.joining()));
 

@@ -13,16 +13,16 @@ import java.util.stream.IntStream;
 
 
 public class DigitalNumberContainer {
-    public final static int MIN_HEIGHT = 3;
-    public final static int MIN_WIDTH = 3;
-    public final static int MAX_DIGITS_PER_LINE = 9;
-    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
-    private final String[] lines;
-    private final int width;
-    private final boolean variableMode;
-    private final boolean singleEmptyLineSeparator;
-    private final Processor digitalTextProcessor;
-    private final List<String> results;
+    public final static  int          MIN_HEIGHT          = 3;
+    public final static  int          MIN_WIDTH           = 3;
+    public final static  int          MAX_DIGITS_PER_LINE = 9;
+    private static final String       LINE_SEPARATOR      = System.getProperty("line.separator");
+    private final        String[]     lines;
+    private final        int          width;
+    private final        boolean      variableMode;
+    private final        boolean      singleEmptyLineSeparator;
+    private final        Processor    digitalTextProcessor;
+    private final        List<String> results;
 
     public DigitalNumberContainer(final String input, final ScanConfig scanConfig) {
         this.lines = input.split(LINE_SEPARATOR);
@@ -46,8 +46,8 @@ public class DigitalNumberContainer {
     }
 
     private class DigitalNumberIterator implements Iterator<Number> {
-        private int start;
-        private int end;
+        private int     start;
+        private int     end;
         private boolean initialised;
 
         private DigitalNumberIterator() {
@@ -92,7 +92,7 @@ public class DigitalNumberContainer {
         }
 
         // This method finds the next new line
-        private int newLinePos(String[] lines, int previousEnd) {
+        private int newLinePos(final String[] lines, final int previousEnd) {
             if (previousEnd == lines.length) {
                 //we have reached the end of processing
                 return previousEnd;
@@ -103,7 +103,7 @@ public class DigitalNumberContainer {
                                       .filter(value -> lines[value].trim().isEmpty())
                                       .findFirst()
                                       .orElse(lines.length);
-            
+
             // when singleEmptyLineSeparator is false, we recursively find the next new line
             // when we exceed the min height of a number, it means we should stop the recursion as the new line now is the end for this number
             if (!singleEmptyLineSeparator && newLinePos - previousEnd < MIN_HEIGHT) {

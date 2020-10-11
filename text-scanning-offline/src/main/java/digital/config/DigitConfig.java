@@ -17,20 +17,20 @@ public final class DigitConfig {
      */
     private static final Digit reference = Digit.builder()
                                                 .top(Line.builder() //     -
-                                                           .left(BLANK)
-                                                           .body(BAR)
-                                                           .right(BLANK)
-                                                           .build())
+                                                         .left(BLANK)
+                                                         .body(BAR)
+                                                         .right(BLANK)
+                                                         .build())
                                                 .middle(Line.builder() // |_|
-                                                              .left(LINE)
-                                                              .body(BAR)
-                                                              .right(LINE)
-                                                              .build())
+                                                            .left(LINE)
+                                                            .body(BAR)
+                                                            .right(LINE)
+                                                            .build())
                                                 .bottom(Line.builder() // |_|
-                                                              .left(LINE)
-                                                              .body(BAR)
-                                                              .right(LINE)
-                                                              .build())
+                                                            .left(LINE)
+                                                            .body(BAR)
+                                                            .right(LINE)
+                                                            .build())
                                                 .build();
 
     public static final Map<Digit, Integer> MAP = Map.of(

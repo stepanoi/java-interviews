@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class ScanConfig {
-    private final int width;
+    private final int     width;
     private final boolean variableMode;
     private final boolean singleEmptyLineSeparator;
 }

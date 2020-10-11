@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ManyNumbersTest {
 
-    private static final int TOTAL_NUMBERS = 400;
+    private static final int TOTAL_NUMBERS = 1000;
 
     @Test
     public void should_match_generated_numbers_test() {

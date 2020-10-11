@@ -22,9 +22,10 @@ public final class DigitalNumberScanner {
 
     public String scan(final String input, final ScanConfig scanConfig) {
         log.info("Scanning with " + scanConfig);
+        
         DigitalNumberContainer digitalNumberContainer = new DigitalNumberContainer(input, scanConfig);
-        Number number;
-        Iterator<Number> iterator = digitalNumberContainer.iterator();
+        Number                 number;
+        Iterator<Number>       iterator               = digitalNumberContainer.iterator();
         while (iterator.hasNext()) {
             number = iterator.next();
             digitalNumberContainer.process(number);
@@ -32,6 +33,7 @@ public final class DigitalNumberScanner {
 
         String actualDigits = digitalNumberContainer.getActualDigits();
         log.info("Result\n" + actualDigits);
+        
         return actualDigits;
     }
 }

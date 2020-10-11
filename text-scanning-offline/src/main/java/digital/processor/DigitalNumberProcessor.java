@@ -21,7 +21,7 @@ import static digital.container.DigitalNumberContainer.MIN_WIDTH;
 public class DigitalNumberProcessor implements Processor {
     private static final String UNKNOWN = "?";
     private static final String ILLEGAL = "ILL";
-    private static final String EMPTY = "";
+    private static final String EMPTY   = "";
 
     @Override
     public String process(final Number number, final int width) {
@@ -41,9 +41,9 @@ public class DigitalNumberProcessor implements Processor {
                                                            .collect(Collectors.toList()))
                                  .map(lines -> {
                                      int numberOfLines = lines.size();
-                                     int firstLinePos = 0;
+                                     int firstLinePos  = 0;
                                      int middleLinePos = (int) Math.floor(((double) numberOfLines) / 2);
-                                     int lastLinePos = lines.size() - 1;
+                                     int lastLinePos   = lines.size() - 1;
 
                                      Integer value = recognise(lines, firstLinePos, middleLinePos, lastLinePos);
 
@@ -60,13 +60,13 @@ public class DigitalNumberProcessor implements Processor {
 
     @Override
     public Integer recognise(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
-        Digit digit = buildDigit(lines, firstLinePos, middleLinePos, lastLinePos);
+        Digit   digit = buildDigit(lines, firstLinePos, middleLinePos, lastLinePos);
         Integer value = DigitConfig.MAP.get(digit);
-        
-        if(Objects.isNull(value)) {
+
+        if (Objects.isNull(value)) {
             log.info("Could not recognise " + digit);
         }
-        
+
         return value;
     }
 
