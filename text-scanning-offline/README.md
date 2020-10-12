@@ -22,3 +22,6 @@ If the digit cannot be read, replace the illegal characters with an "?" and appe
 
 Please make it a maven project. Testing your solution is important part of the task - we will pay special attention to the coverage and corner cases considered.
 Also bear in mind that the implementation will set the stage for our live session to follow - as part of this session we will ask you to evolve your solution to support new requirement.
+
+## Setup
+Solution uses [Lombok](https://projectlombok.org/setup/intellij). Please remember to enable Annotation Processing in IntelliJ IDEA. 
