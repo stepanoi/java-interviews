@@ -7,13 +7,13 @@ import com.digitalnumber.scanner.model.VariableDigit;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static com.digitalnumber.scanner.util.LineUtils.matchBody;
 import static com.digitalnumber.scanner.util.LineUtils.matchEdge;
-import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.stripToNull;
 
 /*
@@ -24,34 +24,31 @@ public final class EnhancedDigitalNumberProcessor extends com.digitalnumber.scan
 
     @Override
     public Integer recognise(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
-        Integer value = super.recognise(lines, firstLinePos, middleLinePos, lastLinePos);
-        
-        if (nonNull(value)) {
-            VariableDigit current = buildVariableDigit(lines, firstLinePos, middleLinePos, lastLinePos);
-            
-            VariableDigit ref = VariableDigitConfig.MAP.get(value);
+        return Optional.ofNullable(super.recognise(lines, firstLinePos, middleLinePos, lastLinePos))
+                       .map(value -> {
+                           VariableDigit current = buildVariableDigit(lines, firstLinePos, middleLinePos, lastLinePos);
+                           VariableDigit ref     = VariableDigitConfig.MAP.get(value);
 
-            boolean topEdgeMatch = matchEdge(current.getTop(), ref.getTop());
+                           boolean topEdgeMatch = matchEdge(current.getTop(), ref.getTop());
 
-            boolean topBodyMatch = matchBody(current.getTop(), ref.getTop());
+                           boolean topBodyMatch = matchBody(current.getTop(), ref.getTop());
 
-            boolean bottomEdgeMatch = matchEdge(current.getBottom(), ref.getBottom());
+                           boolean bottomEdgeMatch = matchEdge(current.getBottom(), ref.getBottom());
 
-            boolean bottomBodyMatch = matchBody(current.getBottom(), ref.getBottom());
+                           boolean bottomBodyMatch = matchBody(current.getBottom(), ref.getBottom());
 
-            final Integer finalValue = value;
-            value = Stream.of(topEdgeMatch, topBodyMatch, bottomEdgeMatch, bottomBodyMatch)
-                          .reduce(Boolean::logicalAnd)
-                          .filter(e -> e == Boolean.TRUE)
-                          .map(e -> finalValue)
-                          .orElse(null);
-        }
+                           return Stream.of(topEdgeMatch, topBodyMatch, bottomEdgeMatch, bottomBodyMatch)
+                                        .reduce(Boolean::logicalAnd)
+                                        .filter(e -> e == Boolean.TRUE)
+                                        .map(e -> value)
+                                        .orElse(null);
+                       })
+                       .orElse(null);
 
-        return value;
     }
 
     private VariableDigit buildVariableDigit(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
-        Line top = variableLine(firstLinePos + 1, middleLinePos, lines);
+        Line top    = variableLine(firstLinePos + 1, middleLinePos, lines);
         Line bottom = variableLine(middleLinePos + 1, lastLinePos, lines);
 
         return VariableDigit.builder()
@@ -65,7 +62,7 @@ public final class EnhancedDigitalNumberProcessor extends com.digitalnumber.scan
                                            .mapToObj(value -> StringUtils.left(lines.get(value), 1))
                                            .distinct()
                                            .collect(Collectors.joining()));
-        
+
         String body = stripToNull(IntStream.range(start, end)
                                            .mapToObj(value -> {
                                                String s = lines.get(value);
@@ -74,7 +71,7 @@ public final class EnhancedDigitalNumberProcessor extends com.digitalnumber.scan
                                            .map(String::valueOf)
                                            .distinct()
                                            .collect(Collectors.joining()));
-        
+
         String right = stripToNull(IntStream.range(start, end)
                                             .mapToObj(value -> StringUtils.right(lines.get(value), 1))
                                             .distinct()

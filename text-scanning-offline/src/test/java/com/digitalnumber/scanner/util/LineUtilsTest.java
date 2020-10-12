@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static com.digitalnumber.scanner.model.Fill.BAR;
+import static com.digitalnumber.scanner.model.Fill.BLANK;
 import static com.digitalnumber.scanner.model.Fill.LINE;
 
 class LineUtilsTest {
@@ -53,4 +54,39 @@ class LineUtilsTest {
     public void should_match_body(Line current, Line ref, Boolean expected) {
         Assertions.assertEquals(expected, LineUtils.matchBody(current, ref));
     }
+
+    public static Stream<Arguments> should_create_line_as_expected() {
+        return Stream.of(
+                Arguments.of("   ", Line.builder().left(BLANK).body(BLANK).right(BLANK).build()),
+                
+                Arguments.of("_  ", Line.builder().left(BAR).body(BLANK).right(BLANK).build()),
+                Arguments.of(" _ ", Line.builder().left(BLANK).body(BAR).right(BLANK).build()),
+                Arguments.of("  _", Line.builder().left(BLANK).body(BLANK).right(BAR).build()),
+                Arguments.of("__ ", Line.builder().left(BAR).body(BAR).right(BLANK).build()),
+                Arguments.of(" __", Line.builder().left(BLANK).body(BAR).right(BAR).build()),
+                Arguments.of("___", Line.builder().left(BAR).body(BAR).right(BAR).build()),
+                
+                Arguments.of("|  ", Line.builder().left(LINE).body(BLANK).right(BLANK).build()),
+                Arguments.of(" | ", Line.builder().left(BLANK).body(LINE).right(BLANK).build()),
+                Arguments.of("  |", Line.builder().left(BLANK).body(BLANK).right(LINE).build()),
+                Arguments.of("|| ", Line.builder().left(LINE).body(LINE).right(BLANK).build()),
+                Arguments.of(" ||", Line.builder().left(BLANK).body(LINE).right(LINE).build()),
+                Arguments.of("|||", Line.builder().left(LINE).body(LINE).right(LINE).build()),
+
+                Arguments.of("*  ", Line.builder().left(null).body(BLANK).right(BLANK).build()),
+                Arguments.of(" * ", Line.builder().left(BLANK).body(null).right(BLANK).build()),
+                Arguments.of("  *", Line.builder().left(BLANK).body(BLANK).right(null).build()),
+                Arguments.of("** ", Line.builder().left(null).body(null).right(BLANK).build()),
+                Arguments.of(" **", Line.builder().left(BLANK).body(null).right(null).build()),
+                Arguments.of("***", Line.builder().left(null).body(null).right(null).build())
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    public void should_create_line_as_expected(String string, Line expected) {
+        Assertions.assertEquals(expected, LineUtils.line(string));
+    }
+
+
 }

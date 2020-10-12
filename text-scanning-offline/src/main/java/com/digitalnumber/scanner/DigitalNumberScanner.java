@@ -7,8 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Iterator;
 
-import static com.digitalnumber.scanner.container.DigitalNumberContainer.MIN_WIDTH;
-
 @Slf4j
 public final class DigitalNumberScanner {
 
@@ -24,11 +22,9 @@ public final class DigitalNumberScanner {
         log.info("Scanning with " + scanConfig);
         
         DigitalNumberContainer digitalNumberContainer = new DigitalNumberContainer(input, scanConfig);
-        Number                 number;
         Iterator<Number>       iterator               = digitalNumberContainer.iterator();
         while (iterator.hasNext()) {
-            number = iterator.next();
-            digitalNumberContainer.process(number);
+            digitalNumberContainer.process(iterator.next());
         }
 
         String actualDigits = digitalNumberContainer.getActualDigits();

@@ -1,13 +1,9 @@
 package com.digitalnumber.scanner.processor;
 
 import com.digitalnumber.scanner.config.DigitConfig;
-import com.digitalnumber.scanner.container.DigitalNumberContainer;
 import com.digitalnumber.scanner.model.Digit;
-import com.digitalnumber.scanner.model.Fill;
-import com.digitalnumber.scanner.model.Line;
 import com.digitalnumber.scanner.model.Number;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +11,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static com.digitalnumber.scanner.container.DigitalNumberContainer.*;
+import static com.digitalnumber.scanner.container.DigitalNumberContainer.MAX_DIGITS_PER_LINE;
+import static com.digitalnumber.scanner.container.DigitalNumberContainer.MIN_WIDTH;
+import static com.digitalnumber.scanner.util.LineUtils.line;
 
 
 @Slf4j
@@ -61,7 +59,12 @@ public class DigitalNumberProcessor implements Processor {
 
     @Override
     public Integer recognise(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
-        Digit   digit = buildDigit(lines, firstLinePos, middleLinePos, lastLinePos);
+        Digit digit = Digit.builder()
+                           .top(line(lines.get(firstLinePos)))
+                           .middle(line(lines.get(middleLinePos)))
+                           .bottom(line(lines.get(lastLinePos)))
+                           .build();
+
         Integer value = DigitConfig.MAP.get(digit);
 
         if (Objects.isNull(value)) {
@@ -94,39 +97,5 @@ public class DigitalNumberProcessor implements Processor {
         }
 
         return lineLength;
-    }
-
-    private Digit buildDigit(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
-        return Digit.builder()
-                    .top(Line.builder()
-                             .left(lineLeft(lines.get(firstLinePos)))
-                             .body(lineBody(lines.get(firstLinePos)))
-                             .right(lineRight(lines.get(firstLinePos)))
-                             .build())
-                    .middle(Line.builder()
-                                .left(lineLeft(lines.get(middleLinePos)))
-                                .body(lineBody(lines.get(middleLinePos)))
-                                .right(lineRight(lines.get(middleLinePos)))
-                                .build())
-                    .bottom(Line.builder()
-                                .left(lineLeft(lines.get(lastLinePos)))
-                                .body(lineBody(lines.get(lastLinePos)))
-                                .right(lineRight(lines.get(lastLinePos)))
-                                .build())
-                    .build();
-    }
-
-    private Fill lineLeft(final String line) {
-        return Fill.from(StringUtils.left(line, 1));
-    }
-
-    private Fill lineBody(final String line) {
-        return Fill.from(Arrays.stream(line.substring(1, line.length() - 1).split(EMPTY))
-                               .distinct()
-                               .collect(Collectors.joining()));
-    }
-
-    private Fill lineRight(final String line) {
-        return Fill.from(StringUtils.right(line, 1));
     }
 }

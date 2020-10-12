@@ -1,6 +1,5 @@
 package com.digitalnumber.scanner;
 
-import com.digitalnumber.scanner.DigitalNumberScanner;
 import com.digitalnumber.scanner.config.DigitConfig;
 import com.digitalnumber.scanner.model.Digit;
 import com.digitalnumber.scanner.model.Line;
@@ -44,7 +43,7 @@ public class ManyNumbersTest {
         //Print it for illustrative purposes only
         System.out.println(generated);
         
-        //Kick of the recognition process and assert we match what we generated at the start
+        //Kick off the recognition process and assert we match what we generated at the start
         DigitalNumberScanner unit = new DigitalNumberScanner();
         assertEquals(expected.stream().collect(Collectors.joining(System.lineSeparator())), unit.scan(generated));
     }
@@ -60,22 +59,17 @@ public class ManyNumbersTest {
                                    .collect(Collectors.toList());
 
         StringBuilder builder = new StringBuilder();
-        for (Digit n : digits) {
-            printLine(n.getTop(), builder);
-        }
+
+        digits.forEach(n -> printLine(n.getTop(), builder));
 
         builder.append(System.lineSeparator());
 
-        for (Digit n : digits) {
-            printLine(n.getMiddle(), builder);
-        }
+        digits.forEach(n -> printLine(n.getMiddle(), builder));
 
         builder.append(System.lineSeparator());
 
-        for (Digit n : digits) {
-            printLine(n.getBottom(), builder);
-        }
-
+        digits.forEach(n -> printLine(n.getBottom(), builder));
+ 
         builder.append(System.lineSeparator());
         return builder.toString();
     }
