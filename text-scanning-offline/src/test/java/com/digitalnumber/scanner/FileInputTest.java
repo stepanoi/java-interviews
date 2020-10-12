@@ -11,10 +11,10 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class FileInputTest {
+class FileInputTest {
     private final DigitalNumberScanner unit = new DigitalNumberScanner();
     
-    public static Stream<Arguments> should_read_from_file_and_match() {
+    static Stream<Arguments> should_read_from_file_and_match() {
         return Stream.of(
                 Arguments.of("input/singleChunk", "000000000"),
                 Arguments.of("input/multipleChunks", "123456789\n" +
@@ -28,7 +28,7 @@ public class FileInputTest {
 
     @ParameterizedTest
     @MethodSource
-    public void should_read_from_file_and_match(Path path, String expected) throws IOException {
+    void should_read_from_file_and_match(Path path, String expected) throws IOException {
         assertEquals(expected, unit.scan(Files.readString(path)));
     }
 

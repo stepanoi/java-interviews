@@ -14,10 +14,10 @@ import static com.digitalnumber.scanner.container.DigitalNumberContainer.MIN_WID
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class EnhancedDigitalNumberScannerTest {
+class EnhancedDigitalNumberScannerTest {
     private final DigitalNumberScanner unit = new DigitalNumberScanner();
 
-    public static Stream<Arguments> should_throw_exception_when_lines_length_is_not_exactly_product_of_custom_width_and_max_digits_per_line() {
+    static Stream<Arguments> should_throw_exception_when_lines_length_is_not_exactly_product_of_custom_width_and_max_digits_per_line() {
         return Stream.of(
                 //space at end
                 Arguments.of(" __  __  __  __  __  __  __  __  __  \n" +
@@ -186,7 +186,7 @@ public class EnhancedDigitalNumberScannerTest {
             "\n",
 
     })
-    public void should_match_multiple_numbers_multi_line_separator(String input) {
+    void should_match_multiple_numbers_multi_line_separator(String input) {
         String expected = "123456789\n" +
                           "123456789\n" +
                           "123456789";
@@ -198,7 +198,7 @@ public class EnhancedDigitalNumberScannerTest {
     }
 
     @Test
-    public void should_match_variable_height() {
+    void should_match_variable_height() {
         String input = " _  _  _  _  _  _  _  _  _ \n" +
                        "| || || || || || || || || |\n" +
                        "| || || || || || || || || |\n" +
@@ -213,7 +213,7 @@ public class EnhancedDigitalNumberScannerTest {
     }
 
     @Test
-    public void should_not_match_variable_number() {
+    void should_not_match_variable_number() {
         String input = "*_  _  _  _  _  _  _  _  _ \n" +
                        "* || || || || || || || || |\n" +
                        "| || || || || || || || || |\n" +
@@ -228,7 +228,7 @@ public class EnhancedDigitalNumberScannerTest {
     }
 
     @Test
-    public void should_not_match_variable_height() {
+    void should_not_match_variable_height() {
         String input = " _  _  _  _  _  _  _  _  _ \n" +
                        "| || || || || || || || || |\n" +
                        "| || || || || || || || || |\n" +
@@ -242,7 +242,7 @@ public class EnhancedDigitalNumberScannerTest {
     }
 
     @Test
-    public void should_match_variable_width() {
+    void should_match_variable_width() {
         String input = " __  __  __  __  __  __  __  __  __ \n" +
                        "|  ||  ||  ||  ||  ||  ||  ||  ||  |\n" +
                        "|__||__||__||__||__||__||__||__||__|";
@@ -256,7 +256,7 @@ public class EnhancedDigitalNumberScannerTest {
 
     @ParameterizedTest
     @MethodSource
-    public void should_throw_exception_when_lines_length_is_not_exactly_product_of_custom_width_and_max_digits_per_line(String input, int width) {
+    void should_throw_exception_when_lines_length_is_not_exactly_product_of_custom_width_and_max_digits_per_line(String input, int width) {
         Exception exception = assertThrows(IllegalStateException.class, () -> unit.scan(input, ScanConfig.builder()
                                                                                                          .width(width)
                                                                                                          .variableMode(true)

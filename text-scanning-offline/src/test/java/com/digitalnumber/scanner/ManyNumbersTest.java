@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ManyNumbersTest {
+class ManyNumbersTest {
 
     private static final int TOTAL_NUMBERS = 1000;
 
     @Test
-    public void should_match_generated_numbers_test() {
+    void should_match_generated_numbers_test() {
         //Let's randomly generate the total number of numbers we want
         List<String> expected = new Random()
                 .ints(0, 999999999)

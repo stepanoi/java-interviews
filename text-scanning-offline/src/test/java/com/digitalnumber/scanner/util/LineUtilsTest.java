@@ -13,7 +13,7 @@ import static com.digitalnumber.scanner.model.Fill.BLANK;
 import static com.digitalnumber.scanner.model.Fill.LINE;
 
 class LineUtilsTest {
-    public static Stream<Arguments> should_match_edge() {
+    static Stream<Arguments> should_match_edge() {
         return Stream.of(
                 Arguments.of(Line.builder().left(BAR).build(), Line.builder().left(BAR).build(), true),
                 Arguments.of(Line.builder().right(BAR).build(), Line.builder().right(BAR).build(), true),
@@ -27,11 +27,11 @@ class LineUtilsTest {
 
     @ParameterizedTest
     @MethodSource
-    public void should_match_edge(Line current, Line ref, Boolean expected) {
+    void should_match_edge(Line current, Line ref, Boolean expected) {
         Assertions.assertEquals(expected, LineUtils.matchEdge(current, ref));
     }
 
-    public static Stream<Arguments> should_match_body() {
+    static Stream<Arguments> should_match_body() {
         return Stream.of(
                 Arguments.of(Line.builder().build(), Line.builder().build(), true),
                 Arguments.of(Line.builder().body(BAR).build(), Line.builder().body(BAR).build(), true),
@@ -51,11 +51,11 @@ class LineUtilsTest {
 
     @ParameterizedTest
     @MethodSource
-    public void should_match_body(Line current, Line ref, Boolean expected) {
+    void should_match_body(Line current, Line ref, Boolean expected) {
         Assertions.assertEquals(expected, LineUtils.matchBody(current, ref));
     }
 
-    public static Stream<Arguments> should_create_line_as_expected() {
+    static Stream<Arguments> should_create_line_as_expected() {
         return Stream.of(
                 Arguments.of("   ", Line.builder().left(BLANK).body(BLANK).right(BLANK).build()),
                 
@@ -84,7 +84,7 @@ class LineUtilsTest {
 
     @ParameterizedTest
     @MethodSource
-    public void should_create_line_as_expected(String string, Line expected) {
+    void should_create_line_as_expected(String string, Line expected) {
         Assertions.assertEquals(expected, LineUtils.line(string));
     }
 

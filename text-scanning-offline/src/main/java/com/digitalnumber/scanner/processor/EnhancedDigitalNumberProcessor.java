@@ -20,7 +20,7 @@ import static org.apache.commons.lang3.StringUtils.stripToNull;
     This class handles processing of digits that have variable width and height. It serves as an extension to the initial requirement.
     It can be activated by specifying Task.variableMode = true
  */
-public final class EnhancedDigitalNumberProcessor extends com.digitalnumber.scanner.processor.DigitalNumberProcessor {
+public final class EnhancedDigitalNumberProcessor extends DigitalNumberProcessor {
 
     @Override
     public Integer recognise(final List<String> lines, final int firstLinePos, final int middleLinePos, final int lastLinePos) {
